@@ -6,8 +6,10 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 20px;
             padding: 20px;
+            padding-top: 0px;
+            margin: 20px;
+            margin-top: 0px;
         }
         table {
             width: 100%;
@@ -30,10 +32,33 @@
         tr:hover {
             background-color: #ddd;
         }
+        .stats {
+            margin-bottom: 20px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .stats p {
+            margin: 5px 0;
+        }
+
+        span {
+            color: blue;
+        }
     </style>
 </head>
 <body>
-    <h1>Subtitle Files and Detected Languages</h1>
+    <h1>Subtitles Detected Languages</h1>
+
+    <div class="stats">
+        <p><strong>Total de legendas:</strong> <span>{{ stats.total }}</span></p>
+        <p><strong>Total de legendas em inglês:</strong> <span>{{ stats.total_english }}</span></p>
+        <p><strong>Total de legendas em português:</strong> <span>{{ stats.total_portuguese }}</span></p>
+        <p><strong>Total de legendas indeterminadas:</strong> <span>{{ stats.total_undefined }}</span></p>
+        <p><strong>Total de legendas com erros:</strong> <span>{{ stats.total_errors }}</span></p>
+    </div>
+
     <table>
         <tr>
             <th>#</th>
