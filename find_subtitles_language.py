@@ -1,66 +1,10 @@
 import os
-from flask import Flask, render_template_string
+from flask import Flask, render_template
 import chardet
 
 app = Flask(__name__)
 
-HTML_TEMPLATE = """
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>Subtitle Language Detection</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-            padding: 20px;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-        th, td {
-            padding: 12px;
-            text-align: left;
-            border: 1px solid #ddd;
-        }
-        th {
-            background-color: #4CAF50;
-            color: white;
-        }
-        tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-        tr:hover {
-            background-color: #ddd;
-        }
-    </style>
-</head>
-<body>
-    <h1>Subtitle Files and Detected Languages</h1>
-    <table>
-        <tr>
-            <th>#</th>
-            <th>Inglês</th>
-            <th>Português</th>
-            <th>Indeterminado</th>
-            <th>Erro</th>
-        </tr>
-        {% for idx, (english, portuguese, undefined, error) in enumerate(subtitles, start=1) %}
-        <tr>
-            <td>{{ idx }}</td>
-            <td>{{ english }}</td>
-            <td>{{ portuguese }}</td>
-            <td>{{ undefined }}</td>
-            <td>{{ error }}</td>
-        </tr>
-        {% endfor %}
-    </table>
-</body>
-</html>
-"""
+
 
 def detect_encoding(file_path):
     """Detect the encoding of a file."""
@@ -106,7 +50,7 @@ def get_subtitles_languages(directory_path):
 
 @app.route('/')
 def index():
-    return render_template_string(HTML_TEMPLATE, subtitles=subtitles, enumerate=enumerate)
+    return render_template('index.html', subtitles=subtitles, enumerate=enumerate)
 
 
 if __name__ == '__main__':
